@@ -194,12 +194,133 @@ const countries = [
   'Zimbabwe'
 ]
 
+// search
+const inputSearch = document.querySelector(".search-input");
+
+// buttons
+const buttonSwip = document.querySelector(".btn-swip");
+const buttonSw = document.querySelector(".btn-sw");
+const buttonSwaw = document.querySelector(".btn-swaw") ;
+
+// coincidences & counters
+const countriesContainig = document.querySelector(".countries-containig");
+const countriesNumber = document.querySelector(".countries-number");
+
+const countriesStart = document.querySelector(".countries-start");
+const countriesStartNumber = document.querySelector(".countries-start-number")
+
+const counterContriesStartingEl = document.querySelector(".counter-contries-starting")
+const counterContries = document.querySelector(".counter-contries");
+
+const totalCountriesEl = document.querySelector(".total-countries");
+totalCountriesEl.textContent = countries.length;
+
 const countriesList = document.querySelector(".list-countries");
 let li;
 
+const resetStatsP = () => {
+	counterContriesStartingEl.classList.add("filter");
+	counterContries.classList.add("filter");
+};
+
+// add elements to DOM
 countries.forEach((element) => {
 	li = document.createElement("li");
 	li.textContent = element;
-	li.className = "countrie";
+	li.className = "countrie-order";
+	li.classList.add("countrie");
 	countriesList.appendChild(li);
+});
+
+function searchStartingWord() {
+	if (inputSearch.classList.contains("start-word")) {
+		inputSearch.classList.remove("start-word");
+	} else {
+		inputSearch.classList.add("start-word")
+	}
+}
+
+buttonSw.addEventListener("click", () => searchStartingWord())
+
+// order and reverse countries to A-Z or Z-A
+function reverseAndOrderCountries() {
+	// delete child elements li
+	countriesList.innerHTML = "";
+	// reverse arrays of countries
+	let reverseC = countries.reverse();
+	
+	if (li.classList.contains("countrie-order")) {
+		reverseC.forEach((element) => {
+			li = document.createElement("li");
+			li.textContent = element;
+			li.className = "countrie-reverse";
+			li.classList.add("countrie");
+			countriesList.appendChild(li);
+		});
+	} else {
+		countries.forEach((element) => {
+			li = document.createElement("li");
+			li.textContent = element;
+			li.className = "countrie-order";
+			li.classList.add("countrie");
+			countriesList.appendChild(li);
+		});	
+	};
+};
+
+buttonSwip.addEventListener("click", () => reverseAndOrderCountries());
+
+document.addEventListener("keyup", (e) => {
+
+
+	if (e.target.matches(".search-input")) {
+
+		if (inputSearch.classList.contains("start-word")) {
+
+			counterContriesStartingEl.classList.remove("filter")
+			counterContries.classList.add("filter");
+			
+			let countStartWord = 0;
+			
+			countriesStart.textContent = e.target.value;
+
+
+			document.querySelectorAll(".countrie").forEach((countrie) => {
+				
+				let coincidense = countrie.textContent.toLowerCase().startsWith(e.target.value.toLowerCase());
+				
+				if (coincidense) {
+					countrie.classList.remove("filter");
+					countStartWord++;
+				} else {
+					countrie.classList.add("filter");
+				};
+			});
+
+			countriesStartNumber.textContent = countStartWord;
+				
+		} else {
+
+			counterContries.classList.remove("filter");
+			counterContriesStartingEl.classList.add("filter");
+
+			let count = 0;
+			
+			countriesContainig.textContent = e.target.value;
+
+			document.querySelectorAll(".countrie").forEach((countrie) => {
+				
+				let coincidense = countrie.textContent.toLowerCase().includes(e.target.value.toLowerCase());
+				
+				if (coincidense) {
+					countrie.classList.remove("filter");
+					count++;
+				} else {
+					countrie.classList.add("filter");
+				};
+			});
+
+			countriesNumber.textContent = count;
+		};
+	};
 });
