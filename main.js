@@ -234,11 +234,16 @@ countries.forEach((element) => {
 
 function searchStartingWord() {
 	if (inputSearch.classList.contains("start-word")) {
-		inputSearch.classList.remove("start-word");
-	} else {
-		inputSearch.classList.add("start-word")
-	}
-}
+	
+  	inputSearch.classList.remove("start-word");
+	  buttonSw.classList.remove("press-btn")
+	
+  } else {
+  	inputSearch.classList.add("start-word");
+    buttonSw.classList.add("press-btn");
+	 
+  };
+};
 
 buttonSw.addEventListener("click", () => searchStartingWord())
 
@@ -255,6 +260,7 @@ function reverseAndOrderCountries() {
 			li.textContent = element;
 			li.className = "countrie-reverse";
 			li.classList.add("countrie");
+      buttonSwip.classList.add("press-btn")
 			countriesList.appendChild(li);
 		});
 	} else {
@@ -263,6 +269,7 @@ function reverseAndOrderCountries() {
 			li.textContent = element;
 			li.className = "countrie-order";
 			li.classList.add("countrie");
+      buttonSwip.classList.remove("press-btn")
 			countriesList.appendChild(li);
 		});	
 	};
@@ -270,12 +277,19 @@ function reverseAndOrderCountries() {
 
 buttonSwip.addEventListener("click", () => reverseAndOrderCountries());
 
+resetStatsP();
 document.addEventListener("keyup", (e) => {
 
 
 	if (e.target.matches(".search-input")) {
 
-		if (inputSearch.classList.contains("start-word")) {
+		
+    if (e.target.value === "") {
+
+      resetStatsP();
+
+		} 
+    if (inputSearch.classList.contains("start-word")) {
 
 			counterContriesStartingEl.classList.remove("filter")
 			counterContries.classList.add("filter");
@@ -289,15 +303,28 @@ document.addEventListener("keyup", (e) => {
 				
 				let coincidense = countrie.textContent.toLowerCase().startsWith(e.target.value.toLowerCase());
 				
-				if (coincidense) {
-					countrie.classList.remove("filter");
+        if (coincidense) {
+				
+        	countrie.classList.remove("filter");
 					countStartWord++;
-				} else {
-					countrie.classList.add("filter");
-				};
+				
+        } else {
+				
+        	countrie.classList.add("filter");
+				
+        };
 			});
 
-			countriesStartNumber.textContent = countStartWord;
+
+      if (countStartWord === 193) {
+        
+        resetStatsP();
+      
+      } else {
+
+  			countriesStartNumber.textContent = countStartWord;
+      }
+
 				
 		} else {
 
@@ -313,14 +340,25 @@ document.addEventListener("keyup", (e) => {
 				let coincidense = countrie.textContent.toLowerCase().includes(e.target.value.toLowerCase());
 				
 				if (coincidense) {
-					countrie.classList.remove("filter");
+				
+        	countrie.classList.remove("filter");
 					count++;
-				} else {
-					countrie.classList.add("filter");
-				};
+				
+        } else {
+				
+        	countrie.classList.add("filter");
+				
+        };
 			});
+      
+      if (count === 193) {
+         
+          resetStatsP();
+      
+      } else {
 
-			countriesNumber.textContent = count;
+		    countriesNumber.textContent = count;
+      };
 		};
 	};
 });

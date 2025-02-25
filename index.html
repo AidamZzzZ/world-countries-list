@@ -7,11 +7,15 @@
 	<meta name="robots" content="index, follow">
 	<title>World Countries List</title>
 	<link rel="stylesheet" href="./styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/54b6f92c9a.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header class="header">
 		<h1 class="title">WORLD COUNTRIES LIST</h1>
-		<p>Total Number of countries: <span class="total-countries"></span></p>
+		<p class="total">Total Number of countries: <span class="total-countries"></span></p>
 		<p class="counter-contries-starting">Countries start with <span class="countries-start"></span> are <span class="countries-start-number"></span></p>
 		<p class="counter-contries">Countries containing <span class="countries-containig"></span> are <span class="countries-number"></span></p>
 		<div class="btn-settings">
@@ -20,7 +24,8 @@
 		</div>
 		<div class="search-countries">
 			<label for="search"></label>
-			<input type="search" name="search" id="search" class="search-input">
+			<input type="search" name="search" id="search" class="search-input" placeholder="Search countrie">
+			<i class="fa-solid fa-magnifying-glass fa-2x"></i>
 		</div>
 	</header>
 	<main>
