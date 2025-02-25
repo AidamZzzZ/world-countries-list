@@ -161,5 +161,51 @@ h1 {
 }
 
 ul {
-	  list-style-type: none;
+	list-style-type: none;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 80%;
+	margin: 20px auto;
+	gap: 20px;
+}
+
+.countrie {
+	position: relative;
+	background-image: url("./images/map_image.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 150px;
+	height: 150px;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: white;
+	z-index: 10000;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.countrie::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: linear-gradient(
+		10deg, 
+		rgba(63, 87, 108, 0.9),
+		transparent
+	);
+	border-radius: 5px;
+	z-index: -1;
+}
+
+.filter {
+	display: none;
 }
